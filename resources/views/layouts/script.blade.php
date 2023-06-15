@@ -18,8 +18,12 @@
     <!--=================================================-->
     
     <!--Demo script [ DEMONSTRATION ]-->
-    <!-- <script src="{{ asset('assets\js\demo\nifty-demo.min.js') }}"></script> -->
 
     
     <!--Buttons [ SAMPLE ]-->
     <script src="{{ asset('assets\js\demo\ui-buttons.js') }}"></script>
+
+    <!--Icons [ SAMPLE ]-->
+    <script src="{{ asset('assets\js\demo\icons.js') }}"></script>
+
+    

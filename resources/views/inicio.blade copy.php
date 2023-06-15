@@ -1,11 +1,10 @@
 @extends('layouts.main')
 
-@section('title', 'Principal')
+@section('title', 'Inicio')
 
 	@section('head')
 
 	@endsection
-
 
 
 	@section('content')
@@ -676,7 +675,6 @@
 					                                <button class="btn btn-default btn-active-purple">8</button>
 					                            </div>
 					                        </div>
-					                        <!--===================================================-->
 					
 					                    </div>
 					                </div>
@@ -686,9 +684,7 @@
 					</div>
 					
 					
-					
                 </div>
-                <!--===================================================-->
                 <!--End page content-->
 
             </div>
@@ -697,6 +693,6 @@
 
 
 	@section('script')
-
+	
 
 	@endsection

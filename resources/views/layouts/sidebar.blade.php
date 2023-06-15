@@ -6,519 +6,145 @@
                         <div class="nano">
                             <div class="nano-content">
 
-                                <!--Profile Widget-->
-                                <!--================================-->
-                                <div id="mainnav-profile" class="mainnav-profile">
-                                    <div class="profile-wrap text-center">
-                                        <div class="pad-btm">
-                                            <img class="img-circle img-md" src="assets\img\profile-photos\1.png" alt="Profile Picture">
-                                        </div>
-                                        <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
-                                            <span class="pull-right dropdown-toggle">
-                                                <i class="dropdown-caret"></i>
-                                            </span>
-                                            <p class="mnp-name">Aaron Chavez</p>
-                                            <span class="mnp-desc">aaron.cha@themeon.net</span>
-                                        </a>
-                                    </div>
-                                    <div id="profile-nav" class="collapse list-group bg-trans">
-                                        <a href="#" class="list-group-item">
-                                            <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <i class="demo-pli-information icon-lg icon-fw"></i> Help
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <i class="demo-pli-unlock icon-lg icon-fw"></i> Logout
-                                        </a>
-                                    </div>
-                                </div>
+                                <ul id="mainnav-menu" class="list-group"><br>
 
+						            <!--Menu list item inicio-->
+						            <li class="{{ request()->routeIs('inicio') ? 'active-sub' : ''}}">
+										<a href="/">
+						                    <i class="fa fa-home"></i>
+						                    <span class="menu-title">Inicio</span>
+						                </a>
+						            </li>
+									<li class="list-divider"></li>
 
-                                <!--Shortcut buttons-->
-                                <!--================================-->
-                                <div id="mainnav-shortcut" class="hidden">
-                                    <ul class="list-unstyled shortcut-wrap">
-                                        <li class="col-xs-3" data-content="My Profile">
-                                            <a class="shortcut-grid" href="#">
-                                                <div class="icon-wrap icon-wrap-sm icon-circle bg-mint">
-                                                <i class="demo-pli-male"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="col-xs-3" data-content="Messages">
-                                            <a class="shortcut-grid" href="#">
-                                                <div class="icon-wrap icon-wrap-sm icon-circle bg-warning">
-                                                <i class="demo-pli-speech-bubble-3"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="col-xs-3" data-content="Activity">
-                                            <a class="shortcut-grid" href="#">
-                                                <div class="icon-wrap icon-wrap-sm icon-circle bg-success">
-                                                <i class="demo-pli-thunder"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="col-xs-3" data-content="Lock Screen">
-                                            <a class="shortcut-grid" href="#">
-                                                <div class="icon-wrap icon-wrap-sm icon-circle bg-purple">
-                                                <i class="demo-pli-lock-2"></i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!--================================-->
-                                <!--End shortcut buttons-->
-
-
-                                <ul id="mainnav-menu" class="list-group">
 						
-						            <!--Category name-->
-						            <li class="list-header">Navigation</li>
-						
-						            <!--Menu list item-->
-						            <li>
+						            <!--Menu list item catálogos-->
+						            <li class="{{ request()->routeIs('categoria', 'marca', 'empaque', 'unidad_medida') ? 'active-sub' : ''}}">
 						                <a href="#">
-						                    <i class="demo-pli-home"></i>
-						                    <span class="menu-title">Dashboard</span>
+						                    <i class="fa fa-list-alt"></i>
+						                    <span class="menu-title">Catálogos</span>
 											<i class="arrow"></i>
 						                </a>
 						
 						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="index.html">Dashboard 1</a></li>
-											<li><a href="dashboard-2.html">Dashboard 2</a></li>
-											<li><a href="dashboard-3.html">Dashboard 3</a></li>
-											
+						                <ul class="{{ request()->routeIs('categoria', 'marca', 'empaque', 'unidad_medida') ? 'collapse in' : ''}}">
+						                    <li class="{{ request()->routeIs('categoria') ? 'active-link' : ''}}"><a href="categoria">Categorías</a></li>
+											<li class="{{ request()->routeIs('marca') ? 'active-link' : ''}}"><a href="marca">Marcas</a></li>
+											<li class="{{ request()->routeIs('empaque') ? 'active-link' : ''}}"><a href="empaque">Empaques</a></li>
+											<li class="{{ request()->routeIs('unidad_medida') ? 'active-link' : ''}}"><a href="unidad_medida">Unidades de medida</a></li>
 						                </ul>
 						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-split-vertical-2"></i>
-						                    <span class="menu-title">Layouts</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="layouts-collapsed-navigation.html">Collapsed Navigation</a></li>
-											<li><a href="layouts-offcanvas-navigation.html">Off-Canvas Navigation</a></li>
-											<li><a href="layouts-offcanvas-slide-in-navigation.html">Slide-in Navigation</a></li>
-											<li><a href="layouts-offcanvas-revealing-navigation.html">Revealing Navigation</a></li>
-											<li class="list-divider"></li>
-											<li><a href="layouts-aside-right-side.html">Aside on the right side</a></li>
-											<li><a href="layouts-aside-left-side.html">Aside on the left side</a></li>
-											<li><a href="layouts-aside-dark-theme.html">Dark version of aside</a></li>
-											<li class="list-divider"></li>
-											<li><a href="layouts-fixed-navbar.html">Fixed Navbar</a></li>
-											<li><a href="layouts-fixed-footer.html">Fixed Footer</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="widgets.html">
-						                    <i class="demo-pli-gear"></i>
-						                    <span class="menu-title">
-												Widgets
-												<span class="pull-right badge badge-warning">24</span>
-											</span>
-						                </a>
-						            </li>
-						
-						            <li class="list-divider"></li>
-						
-						            <!--Category name-->
-						            <li class="list-header">Components</li>
-						
-						            <!--Menu list item-->
-						            <li class="{{ request()->routeIs('principal') ? 'active-sub' : ''}}">
-						                <a href="#">
-						                    <i class="demo-pli-boot-2"></i>
-						                    <span class="menu-title">UI Elements</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="{{ request()->routeIs('principal') ? 'collapse in' : ''}}">
-											
-						                    <li class="{{ request()->routeIs('principal') ? 'active-link' : ''}}"><a href="/">Buttons</a></li>
-											<li><a href="ui-panels.html">Panels</a></li>
-											<li><a href="ui-modals.html">Modals</a></li>
-											<li><a href="ui-progress-bars.html">Progress bars</a></li>
-											<li><a href="ui-components.html">Components</a></li>
-											<li><a href="ui-typography.html">Typography</a></li>
-											<li><a href="ui-list-group.html">List Group</a></li>
-											<li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a></li>
-											<li><a href="ui-alerts-tooltips.html">Alerts &amp; Tooltips</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li class="{{ request()->routeIs('forms') ? 'active-sub' : ''}}">
-						                <a href="#">
-						                    <i class="demo-pli-pen-5"></i>
-						                    <span class="menu-title">Forms</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="{{ request()->routeIs('forms') ? 'collapse in' : ''}}">
-						                    <li><a href="forms-general.html">General</a></li>
-											<li class="{{ request()->routeIs('forms') ? 'active-link' : ''}}"><a href="/forms">Advanced Components</a></li>
-											<li><a href="forms-validation.html">Validation</a></li>
-											<li><a href="forms-wizard.html">Wizard</a></li>
-											<li><a href="forms-file-upload.html">File Upload</a></li>
-											<li><a href="forms-text-editor.html">Text Editor</a></li>
-											<li><a href="forms-markdown.html">Markdown</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-receipt-4"></i>
-						                    <span class="menu-title">Tables</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="tables-static.html">Static Tables</a></li>
-											<li><a href="tables-bootstrap.html">Bootstrap Tables</a></li>
-											<li><a href="tables-datatable.html">Data Tables</a></li>
-											<li><a href="tables-footable.html">Foo Tables</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-bar-chart"></i>
-						                    <span class="menu-title">Charts</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="charts-morris-js.html">Morris JS</a></li>
-											<li><a href="charts-flot-charts.html">Flot Charts</a></li>
-											<li><a href="charts-easy-pie-charts.html">Easy Pie Charts</a></li>
-											<li><a href="charts-sparklines.html">Sparklines</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-repair"></i>
-						                    <span class="menu-title">Miscellaneous</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="misc-timeline.html">Timeline</a></li>
-											<li><a href="misc-maps.html">Google Maps</a></li>
-											<li><a href="xplugins-notifications.html">Notifications<span class="label label-purple pull-right">Improved</span></a></li>
-											<li><a href="misc-nestable-list.html">Nestable List</a></li>
-											<li><a href="misc-animate-css.html">CSS Animations</a></li>
-											<li><a href="misc-css-loaders.html">CSS Loaders</a></li>
-											<li><a href="misc-spinkit.html">Spinkit</a></li>
-											<li><a href="misc-tree-view.html">Tree View</a></li>
-											<li><a href="misc-clipboard.html">Clipboard</a></li>
-											<li><a href="misc-x-editable.html">X-Editable</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-warning-window"></i>
-						                    <span class="menu-title">Grid System</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="grid-bootstrap.html">Bootstrap Grid</a></li>
-											<li><a href="grid-liquid-fixed.html">Liquid Fixed</a></li>
-											<li><a href="grid-match-height.html">Match Height</a></li>
-											<li><a href="grid-masonry.html">Masonry</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <li class="list-divider"></li>
-						
-						            <!--Category name-->
-						            <li class="list-header">More</li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-computer-secure"></i>
-						                    <span class="menu-title">App Views</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="app-file-manager.html">File Manager</a></li>
-											<li><a href="app-users.html">Users</a></li>
-											<li><a href="app-users-2.html">Users 2</a></li>
-											<li><a href="app-profile.html">Profile</a></li>
-											<li><a href="app-calendar.html">Calendar</a></li>
-											<li><a href="app-taskboard.html">Taskboard</a></li>
-											<li><a href="app-chat.html">Chat</a></li>
-											<li><a href="app-contact-us.html">Contact Us</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-speech-bubble-5"></i>
-						                    <span class="menu-title">Blog Apps</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="blog.html">Blog</a></li>
-											<li><a href="blog-list.html">Blog List</a></li>
-											<li><a href="blog-list-2.html">Blog List 2</a></li>
-											<li><a href="blog-details.html">Blog Details</a></li>
-											<li class="list-divider"></li>
-											<li><a href="blog-manage-posts.html">Manage Posts</a></li>
-											<li><a href="blog-add-edit-post.html">Add Edit Post</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-mail"></i>
-						                    <span class="menu-title">Email</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="mailbox.html">Inbox</a></li>
-											<li><a href="mailbox-message.html">View Message</a></li>
-											<li><a href="mailbox-compose.html">Compose Message</a></li>
-											<li><a href="mailbox-templates.html">Email Templates</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-file-html"></i>
-						                    <span class="menu-title">Other Pages</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="pages-blank.html">Blank Page</a></li>
-											<li><a href="pages-invoice.html">Invoice</a></li>
-											<li><a href="pages-search-results.html">Search Results</a></li>
-											<li><a href="pages-faq.html">FAQ</a></li>
-											<li><a href="pages-pricing.html">Pricing<span class="label label-success pull-right">New</span></a></li>
-											<li class="list-divider"></li>
-											<li><a href="pages-404-alt.html">Error 404 alt</a></li>
-											<li><a href="pages-500-alt.html">Error 500 alt</a></li>
-											<li class="list-divider"></li>
-											<li><a href="pages-404.html">Error 404 </a></li>
-											<li><a href="pages-500.html">Error 500</a></li>
-											<li><a href="pages-maintenance.html">Maintenance</a></li>
-											<li><a href="pages-login.html">Login</a></li>
-											<li><a href="pages-register.html">Register</a></li>
-											<li><a href="pages-password-reminder.html">Password Reminder</a></li>
-											<li><a href="pages-lock-screen.html">Lock Screen</a></li>
-											
-						                </ul>
-						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="#">
-						                    <i class="demo-pli-photo-2"></i>
-						                    <span class="menu-title">Gallery</span>
-											<i class="arrow"></i>
-						                </a>
-						
-						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="gallery-columns.html">Columns</a></li>
-											<li><a href="gallery-justified.html">Justified</a></li>
-											<li><a href="gallery-nested.html">Nested</a></li>
-											<li><a href="gallery-grid.html">Grid</a></li>
-											<li><a href="gallery-carousel.html">Carousel</a></li>
-											<li class="list-divider"></li>
-											<li><a href="gallery-slider.html">Slider</a></li>
-											<li><a href="gallery-default-theme.html">Default Theme</a></li>
-											<li><a href="gallery-compact-theme.html">Compact Theme</a></li>
-											<li><a href="gallery-grid-theme.html">Grid Theme</a></li>
-											
-						                </ul>
-						            </li>
+									<li class="list-divider"></li>
 
 
-                                    <!--Menu list item-->
-                                    <li>
-                                        <a href="#">
-                                            <i class="demo-pli-tactic"></i>
-                                            <span class="menu-title">Menu Level</span>
-                                            <i class="arrow"></i>
-                                        </a>
-
-                                        <!--Submenu-->
-                                        <ul class="collapse">
-                                            <li><a href="#">Second Level Item</a></li>
-                                            <li><a href="#">Second Level Item</a></li>
-                                            <li><a href="#">Second Level Item</a></li>
-                                            <li class="list-divider"></li>
-                                            <li>
-                                                <a href="#">Third Level<i class="arrow"></i></a>
-
-                                                <!--Submenu-->
-                                                <ul class="collapse">
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level<i class="arrow"></i></a>
-
-                                                <!--Submenu-->
-                                                <ul class="collapse">
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li class="list-divider"></li>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-						
-						            <li class="list-divider"></li>
-						
-						            <!--Category name-->
-						            <li class="list-header">Extras</li>
-						
-						            <!--Menu list item-->
-						            <li>
+									<!--Menu list item productos-->
+						            <li class="{{ request()->routeIs('producto', 'existencia', 'agotado', 'poca_existencia', 'sobreexistencia') ? 'active-sub' : ''}}">
 						                <a href="#">
-						                    <i class="demo-pli-happy"></i>
-						                    <span class="menu-title">Icons Pack</span>
+						                    <i class="fa fa-star"></i>
+						                    <span class="menu-title">Productos</span>
 											<i class="arrow"></i>
 						                </a>
 						
 						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="icons-ionicons.html">Ion Icons</a></li>
-											<li><a href="icons-themify.html">Themify</a></li>
-											<li><a href="icons-font-awesome.html">Font Awesome</a></li>
-											<li><a href="icons-flagicons.html">Flag Icon CSS</a></li>
-											<li><a href="icons-weather-icons.html">Weather Icons</a></li>
-											
+						                <ul class="{{ request()->routeIs('producto', 'existencia', 'agotado', 'poca_existencia', 'sobreexistencia') ? 'collapse in' : ''}}">
+											<li class="{{ request()->routeIs('producto') ? 'active-link' : ''}}"><a href="producto">Productos</a></li>
+						                    <li class="{{ request()->routeIs('existencia') ? 'active-link' : ''}}"><a href="existencia">Existencias</a></li>
+											<li class="{{ request()->routeIs('agotado') ? 'active-link' : ''}}"><a href="agotado">Agotados</a></li>
+											<li class="{{ request()->routeIs('poca_existencia') ? 'active-link' : ''}}"><a href="poca_existencia">Quedan pocas existencias</a></li>
+											<li class="{{ request()->routeIs('sobreexistencia') ? 'active-link' : ''}}"><a href="sobreexistencia">Con sobre existencias</a></li>
 						                </ul>
 						            </li>
+									<li class="list-divider"></li>
 						
-						            <!--Menu list item-->
-						            <li>
+
+									<!--Menu list item ventas-->
+						            <li class="{{ request()->routeIs('venta', 'nueva_venta', 'consultar_venta', 'reporte_venta') ? 'active-sub' : '' }}">
 						                <a href="#">
-						                    <i class="demo-pli-medal-2"></i>
-						                    <span class="menu-title">
-												PREMIUM ICONS
-												<span class="label label-danger pull-right">BEST</span>
-											</span>
+						                    <i class="fa fa-shopping-cart"></i>
+						                    <span class="menu-title">Ventas</span>
+											<i class="arrow"></i>
 						                </a>
 						
 						                <!--Submenu-->
-						                <ul class="collapse">
-						                    <li><a href="premium-line-icons.html">Line Icons Pack</a></li>
-											<li><a href="premium-solid-icons.html">Solid Icons Pack</a></li>
-											
+						                <ul class="{{ request()->routeIs('venta', 'nueva_venta', 'consultar_venta', 'reporte_venta') ? 'collapse in' : '' }}">
+										    <li class="{{ request()->routeIs('venta') ? 'active-link' : ''}}"><a href="venta">Ventas</a></li>
+											<li class="{{ request()->routeIs('nueva_venta') ? 'active-link' : ''}}"><a href="nueva_venta">Nueva venta</a></li>
+											<li class="{{ request()->routeIs('consultar_venta') ? 'active-link' : ''}}"><a href="consultar_venta">Consultar venta</a></li>
+											<li class="{{ request()->routeIs('reporte_venta') ? 'active-link' : ''}}"><a href="reporte_venta">Reportes</a></li>
 						                </ul>
 						            </li>
-						
-						            <!--Menu list item-->
-						            <li>
-						                <a href="helper-classes.html">
-						                    <i class="demo-pli-inbox-full"></i>
-						                    <span class="menu-title">Helper Classes</span>
+									<li class="list-divider"></li>
+
+
+									<!--Menu list item compras-->
+						            <li class="{{ request()->routeIs('compra', 'nueva_compra', 'consultar_compra', 'reporte_compra') ? 'active-sub' : '' }}">
+						                <a href="#">
+						                    <i class="fa fa-shopping-bag"></i>
+						                    <span class="menu-title">Compras</span>
+											<i class="arrow"></i>
 						                </a>
-						            </li>                                </ul>
+						
+						                <!--Submenu-->
+						                <ul class="{{ request()->routeIs('compra', 'nueva_compra', 'consultar_compra', 'reporte_compra') ? 'collapse in' : '' }}">
+									    	<li class="{{ request()->routeIs('compra') ? 'active-link' : ''}}"><a href="compra">Compras</a></li>
+											<li class="{{ request()->routeIs('nueva_compra') ? 'active-link' : ''}}"><a href="nueva_compra">Nueva compra</a></li>
+											<li class="{{ request()->routeIs('consultar_compra') ? 'active-link' : ''}}"><a href="consultar_compra">Consultar compra</a></li>
+											<li class="{{ request()->routeIs('reporte_compra') ? 'active-link' : ''}}"><a href="reporte_compra">Reportes</a></li>
+						                </ul>
+						            </li>
+									<li class="list-divider"></li>
 
 
-                                <!--Widget-->
-                                <!--================================-->
-                                <div class="mainnav-widget">
+									<!--Menu list item inventarios-->
+						            <li class="{{ request()->routeIs('inventario_inicial', 'nuevo_inventario') ? 'active-sub' : '' }}">
+						                <a href="#">
+						                    <i class="fa fa-archive"></i>
+						                    <span class="menu-title">Inventario</span>
+											<i class="arrow"></i>
+						                </a>
+						
+						                <!--Submenu-->
+										<ul class="{{ request()->routeIs('inventario_inicial', 'nuevo_inventario') ? 'collapse in' : '' }}">
+						                    <li class="{{ request()->routeIs('inventario_inicial') ? 'active-link' : '' }}"><a href="inventario_inicial">Inventario inicial</a></li>
+											<li class="{{ request()->routeIs('nuevo_inventario') ? 'active-link' : '' }}"><a href="nuevo_inventario">Abrir nuevo inventario</a></li>
+						                </ul>
+						            </li>
+									<li class="list-divider"></li>
 
-                                    <!-- Show the button on collapsed navigation -->
-                                    <div class="show-small">
-                                        <a href="#" data-toggle="menu-widget" data-target="#demo-wg-server">
-                                            <i class="demo-pli-monitor-2"></i>
-                                        </a>
-                                    </div>
+						
+						            <!--Menu list item usuarios-->
+						            <li class="{{ request()->routeIs('usuario', 'rol') ? 'active-sub' : ''}}">
+						                <a href="#">
+						                    <i class="fa fa-user-circle-o"></i>
+						                    <span class="menu-title">Usuarios</span>
+											<i class="arrow"></i>
+						                </a>
+						
+						                <!--Submenu-->
+						                <ul class="{{ request()->routeIs('usuario', 'rol') ? 'collapse in' : ''}}">
+										    <li class="{{ request()->routeIs('usuario') ? 'active-link' : ''}}"><a href="usuario">Usuarios</a></li>
+											<li class="{{ request()->routeIs('rol') ? 'active-link' : ''}}"><a href="rol">Roles</a></li>
+						                </ul>
+						            </li>
+									<li class="list-divider"></li>
 
-                                    <!-- Hide the content on collapsed navigation -->
-                                    <div id="demo-wg-server" class="hide-small mainnav-widget-content">
-                                        <ul class="list-group">
-                                            <li class="list-header pad-no mar-ver">Server Status</li>
-                                            <li class="mar-btm">
-                                                <span class="label label-primary pull-right">15%</span>
-                                                <p>CPU Usage</p>
-                                                <div class="progress progress-sm">
-                                                    <div class="progress-bar progress-bar-primary" style="width: 15%;">
-                                                        <span class="sr-only">15%</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="mar-btm">
-                                                <span class="label label-purple pull-right">75%</span>
-                                                <p>Bandwidth</p>
-                                                <div class="progress progress-sm">
-                                                    <div class="progress-bar progress-bar-purple" style="width: 75%;">
-                                                        <span class="sr-only">75%</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pad-ver"><a href="#" class="btn btn-success btn-bock">View Details</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!--================================-->
-                                <!--End widget-->
 
-                            </div>
+									<!--Menu list item backup-->
+									<li class="{{ request()->routeIs('backup') ? 'active-sub' : ''}}">
+										<a href="backup">
+						                    <i class="fa fa-database"></i>
+						                    <span class="menu-title">Backup</span>
+						                </a>
+						            </li>
+									<li class="list-divider"><br></li>
+									<li class="list-divider"></li>
+
+									
+						        </ul><br>
+
+                            </div><br>
                         </div>
                     </div>
-                    <!--================================-->
                     <!--End menu-->
 
                 </div>
