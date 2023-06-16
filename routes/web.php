@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\DatatableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'inicio')->name('inicio');
 
 //--------------------------Catálogos--------------------------------------
-Route::view('categoria', 'categoria')->name('categoria');
+Route::resource('categorias', CategoriaController::class);
+Route::get('datatable/categorias',[DatatableController::class, 'categoria'])->name('datatable.categoria');
 Route::view('marca' , 'marca')->name('marca');
 Route::view('empaque', 'empaque')->name('empaque');
 Route::view('unidad_medida', 'unidad_medida')->name('unidad_medida');
