@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\Categorias\CategoriaCreateRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriaController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return view('categorias.index');
+        $categorias = Categoria::orderBy('categoria_id', 'DESC')->get();
+        return view('categorias.index')->with(['categorias' => $categorias]);
     }
 
     /**
@@ -33,9 +36,21 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriaCreateRequest $request)
     {
-        //
+        $imagen2 = 'shadow.jpg';
+        $newCategoria = Categoria::create($request->all());
+
+        if ($request->hasFile('imagen')) {
+            $newCategoria->imagen = Storage::disk('categoria-imagenes')->put('', $request->file('imagen'));
+        } else {
+            $newCategoria->imagen = $imagen2;
+        }
+        $newCategoria->save();
+
+        return redirect()
+            ->route('categorias.index')
+            ->with('message', 'Registro creado exitosamente');
     }
 
     /**
@@ -57,7 +72,6 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
     }
 
     /**
@@ -69,7 +83,11 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        $categoria->update($request->all());
+
+        return redirect()
+            ->route('categorias.index')
+            ->with('message', 'Registro actualizado exitosamente');
     }
 
     /**

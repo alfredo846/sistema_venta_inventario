@@ -1,0 +1,76 @@
+.invalid-feedback{
+color: rgb(255, 0, 0);
+}
+
+.is-required:before {
+content: '*';
+margin-left: 3px;
+color: rgb(255, 0, 0);
+font-weight: bold;
+}
+
+.modal-header {
+padding:9px 15px;
+border-bottom:0px solid #eee;
+background-color: #25476a;
+color:#fff;
+font-weight: bold;
+}
+
+/* input file */
+.upload-box{
+font-size: 12px;
+background:white;
+border-radius: 8px;
+box-shadow: 5px 5px 10px black;
+width:300px;
+outline:none;
+cursor: pointer;
+}
+
+::-webkit-file-upload-button{
+color: white;
+background: #25476a;
+padding: 7px;
+border: none;
+border-radius: 8px;
+outline:none;
+width: 140px;
+cursor: pointer;
+}
+
+::-webkit-file-upload-button:hover {
+background: #032450;
+}
+
+
+.imagenperfil {
+/* border-radius: 0%;
+-webkit-border-radius: 0%;
+box-shadow: 0 0 15px 15px #1266e4;
+-webkit-box-shadow: 0 0 3px 3px #25476a; */
+width: 150px;
+height: 130px;
+display: block;
+margin: auto;
+border:0;
+}
+
+.img-cent{
+    display: block;
+    margin: auto;
+    border:0;
+}
+
+/* --------------Imagens de consulta en tablas index -----*/
+.profile-image {
+    width: 49px;
+    height: 44px;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    border:0;
+}
+
+
+

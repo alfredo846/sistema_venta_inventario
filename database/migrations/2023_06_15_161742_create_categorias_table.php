@@ -15,7 +15,8 @@ class CreateCategoriasTable extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('categoria_id');
-            $table->string('nombre');
+            $table->string('nombre',30);
+            $table->text('imagen')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -8,10 +8,10 @@ use Yajra\DataTables\DataTables;
 
 class DatatableController extends Controller
 {
-    public function categoria(){
-        $categorias = Categoria::orderBy('categoria_id','DESC')->get();
+    // public function categoria(){
+    //     $categorias = Categoria::orderBy('categoria_id','DESC')->get();
 
-        return DataTables()->of($categorias)->toJson();
+    //     return DataTables()->of($categorias)->toJson();
 
-    }
+    // }
 }

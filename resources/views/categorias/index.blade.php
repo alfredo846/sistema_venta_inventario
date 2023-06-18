@@ -12,6 +12,9 @@
     <!--Animate.css [ OPTIONAL ]-->
     <link href="{{ asset('assets\plugins\animate-css\animate.min.css') }}" rel="stylesheet">
 
+    <!--Themify Icons [ OPTIONAL ]-->
+    <link href="{{ asset('assets\plugins\themify-icons\themify-icons.min.css') }}" rel="stylesheet">
+
 @endsection
 
 
@@ -32,36 +35,124 @@
 
             <!-- Categorías -->
             <div class="panel">
+                <div class="content">
+                    @include('layouts.partials.alerts')
+                </div>
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <div class="row text-right">
-                            <button id="demo-bootbox-custom-h-form" class="btn btn-primary">
-                                <i class="fa fa-plus-square"> </i> Inserción Manual Categoría</button>
-                            <button id="demo-bootbox-custom-h-form" class="btn btn-success min-tablet">
+                            <button class="btn btn-primary min-tablet" type="button" data-toggle="modal"
+                                data-target="#agregarcategoria">
+                                <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
+                            </button>
+
+                            <button class="btn btn-success min-tablet">
                                 <i class="fa fa-file-excel-o"> </i> Inserción Excel Categoría</button>
+
                         </div>
                         <div class="row text-left">
-                            <button id="demo-bootbox-custom-h-form" class="btn btn-success min-tablet">
-                                <i class="fa fa-file-excel-o"> </i> Exportar excel</button>
+                            <button class="btn btn-success btn-icon btn-circle add-tooltip" data-toggle="tooltip"
+                                data-container="body" data-placement="top" data-original-title="Exportar Excel"><i
+                                    class="fa fa-file-excel-o fa-md"></i></button>
+
+                            <button class="btn btn-danger btn-icon btn-circle add-tooltip" data-toggle="tooltip"
+                                data-container="body" data-placement="top" data-original-title="Exportar PDF"><i
+                                    class="fa fa-file-pdf-o fa-md"></i></button>
                         </div>
-
-
                     </h3>
                 </div><br><br>
 
 
                 <div class="panel-body">
-                    <table id="categoria" class="table table-striped table-bordered" cellspacing="10" width="90%">
+                    <table id="categoria" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Categoría</th>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
                                 <th>Estado</th>
                                 <th class="min-tablet">Acciones</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach ($categorias as $categoria)
+                                <tr>
+                                    <td>{{ $categoria->nombre }}</td>
+                                    <td>
+                                        <img src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}" class="profile-image"
+                                        alt="Imagen categoría">
+                                    </td>
+                                    <td><span class='badge badge-mint'>Activo</span></td>
+                                    <td>
+                                        <button class='btn btn-dark btn-icon'> <i class='ti-eye'></i></button>
+                                        <button class='btn btn-primary btn-icon' type='button' data-toggle='modal'
+                                            data-target='#actualizarmodal'><i class='demo-psi-pen-5 icon-md'></i></button>
+                                        <button class='btn btn-danger btn-icon'><i
+                                                class='demo-psi-recycling icon-md'></i></button>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
+                        </tbody>
                     </table>
                 </div>
+
             </div>
+
+            <!--Start del modal Inserción Manual Categoria-->
+            <div class="modal fade" id="agregarcategoria" tabindex="-2" role="dialog" aria-labelledby="myModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-bold text-light text-center">Agregar Categoría</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times fa-1x text-bold text-light"></i></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form action="{{ route('categorias.store') }}" method="post" enctype="multipart/form-data"
+                                class="form-horizontal">
+                                @csrf
+                                @method('POST')
+                                @include('categorias.create')
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Start del modal actualizar Categoria-->
+            <div class="modal fade" id="actualizarmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Actualizar Categoría</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times fa-1x"></i></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <form action="{{ route('categorias.update', 1) }}" class="form" method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                @include('categorias.edit')
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 
@@ -91,24 +182,71 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#categoria').DataTable({
-                "ajax": "{{ route('datatable.categoria') }}",
-                "columns": [{
-                        data: 'nombre'
-                    },
-                    {
-                        "defaultContent": "<span class='badge badge-mint'>Activo</span> "
-                    },
-                    {
-                        "defaultContent": "<button class='btn btn-info btn-icon'> <i class='fa fa-low-vision fa-1x'></i></button> <button class='btn btn-mint btn-icon'><i class='demo-psi-pen-5 icon-lg'></i></button> <button class='btn btn-danger btn-icon'><i class='demo-psi-recycling icon-lg'></i></button>"
-                    },
+                "order": [
+                    [2, "desc"]
                 ],
-                scrollY: 500,
                 language: {
                     url: "{{ asset('assets/js/spanish.json') }}"
                 }
             });
         });
     </script>
+
+    <script>
+        $('.modal').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+            $("label.error").remove(); // para borrar la etiqueta de error del jquery validate
+            $('#imagenmuestra').removeAttr('src');
+
+        });
+    </script>
+
+
+    @if ($errors->first('nombre'))
+        <script>
+            $('#agregarcategoria').modal('show');
+        </script>
+    @endif
+    @if ($errors->first('imagen'))
+        <script>
+            $('#agregarcategoria').modal('show');
+        </script>
+    @endif
+
+    @if ($errors->first('name'))
+        <script>
+            $('#actualizarmodal').modal('show');
+        </script>
+    @endif
+
+    {{-- --------- Personalización del tiempo en que se muestran las alertas ------- --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".content").fadeOut(1500);
+            }, 3000);
+        });
+    </script>
+
+    {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    // Asignamos el atributo src a la tag de imagen
+                    $('#imagenmuestra').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // El listener va asignado al input
+        $("#imagen").change(function() {
+            readURL(this);
+        });
+    </script>
+
 
 
 @endsection
