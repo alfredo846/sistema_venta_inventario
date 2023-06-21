@@ -78,8 +78,8 @@
                                 <tr>
                                     <td>{{ $categoria->nombre }}</td>
                                     <td>
-                                        <img src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}" class="profile-image"
-                                        alt="Imagen categoría">
+                                        <img src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}"
+                                            class="profile-image" alt="Imagen categoría">
                                     </td>
                                     <td><span class='badge badge-mint'>Activo</span></td>
                                     <td>
@@ -196,8 +196,27 @@
         $('.modal').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
             $("label.error").remove(); // para borrar la etiqueta de error del jquery validate
-            $('#imagenmuestra').removeAttr('src');
+            $('#img').removeAttr('src'); 
+            img.src = 'imagenes/categorias/shadow.jpg';
+        });
+    </script>
 
+    {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
+    <script type="text/javascript">
+        const defaultFile = 'imagenes/categorias/shadow.jpg';
+
+        const file = document.getElementById('imagen');
+        const img = document.getElementById('img');
+        file.addEventListener('change', e => {
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0])
+            } else {
+                img.src = defaultFile;
+            }
         });
     </script>
 
@@ -227,26 +246,5 @@
             }, 3000);
         });
     </script>
-
-    {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    // Asignamos el atributo src a la tag de imagen
-                    $('#imagenmuestra').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // El listener va asignado al input
-        $("#imagen").change(function() {
-            readURL(this);
-        });
-    </script>
-
-
 
 @endsection

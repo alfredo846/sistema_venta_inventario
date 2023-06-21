@@ -1,7 +1,7 @@
 <div class="form-group row">
     <div class="col-md-6">
     </div>
-    <label class="col-md-6 form-control-label text-left invalid-feedback">Los campos marcados con 
+    <label class="col-md-6 form-control-label text-left invalid-feedback">Los campos marcados con
         <strong class="text-bold">*</strong> son obligatorios</label>
 </div><br>
 
@@ -21,9 +21,9 @@
 <div class="form-group row">
     <label class="col-md-3 form-control-label text-left">Imagen</label>
     <div class="col-md-7"><br>
-        <input type="hidden" class="form-control" name="imagenactual" id="imagenactual">
-        <img src="" id="imagenmuestra" class="mg-lg img-circle mar-ver img-cent">
-        <input type="file" placeholder="Coloque la imagen" id="imagen" class="upload-box" name="imagen"
+        <img src="{{ asset('imagenes/categorias/shadow.jpg') }}" id="img"
+            class="mg-lg img-circle mar-ver img-cent" alt="Imagen de la categoría">
+        <input type="file" placeholder="Coloque la imagen" name="imagen" id="imagen" class="upload-box"
             accept="image/png,image/jpeg,image/jpg,image/jfif"><br>
 
         @if ($errors->first('imagen'))
