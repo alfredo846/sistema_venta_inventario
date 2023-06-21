@@ -62,12 +62,11 @@
                     </h3>
                 </div><br><br>
 
-
                 <div class="panel-body">
                     <table id="categoria" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
+                                <th>Categoría</th>
                                 <th>Imagen</th>
                                 <th>Estado</th>
                                 <th class="min-tablet">Acciones</th>
@@ -83,16 +82,20 @@
                                     </td>
                                     <td><span class='badge badge-mint'>Activo</span></td>
                                     <td>
-                                        <button class='btn btn-dark btn-icon'> <i class='ti-eye'></i></button>
+                                        <button class="btn btn-dark btn-icon add-tooltip" data-toggle="modal"
+                                            data-target="#showcategoria{{ $categoria->categoria_id }}"
+                                            data-original-title=""><i class="ion-eye icon-lg"></i>
+                                        </button>
                                         <button class='btn btn-primary btn-icon' type='button' data-toggle='modal'
                                             data-target='#actualizarmodal'><i class='demo-psi-pen-5 icon-md'></i></button>
                                         <button class='btn btn-danger btn-icon'><i
                                                 class='demo-psi-recycling icon-md'></i></button>
                                     </td>
-
                                 </tr>
-                            @endforeach
 
+                                @include('categorias.show')
+
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -196,7 +199,7 @@
         $('.modal').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
             $("label.error").remove(); // para borrar la etiqueta de error del jquery validate
-            $('#img').removeAttr('src'); 
+            $('#img').removeAttr('src');
             img.src = 'imagenes/categorias/shadow.jpg';
         });
     </script>
