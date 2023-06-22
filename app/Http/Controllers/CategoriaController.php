@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categorias\CategoriaCreateRequest;
+use App\Http\Requests\Categorias\CategoriaEditRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CategoriaController extends Controller
@@ -48,6 +49,9 @@ class CategoriaController extends Controller
         }
         $newCategoria->save();
 
+        $this->resetErrorBag();
+        $this->resetValidation();
+
         return redirect()
             ->route('categorias.index')
             ->with('message', 'Registro creado exitosamente');
@@ -81,13 +85,28 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(CategoriaEditRequest $request, Categoria $categoria)
     {
-        $categoria->update($request->all());
+        $categoria->update($request->except('categoria_id', 'imagen'));
+
+        if ($request->hasFile('imagen')) {
+            if (Storage::disk('categoria-imagenes')->exists("$categoria->imagen")) {
+                if ($categoria->imagen == 'shadow.jpg') {
+                    $categoria->imagen = 'shadow.jpg';
+                } else {
+                    Storage::disk('categoria-imagenes')->delete("$categoria->imagen");
+                }
+            }
+            $categoria->imagen = Storage::disk('categoria-imagenes')->put('', $request->file('imagen'));
+        }
+
+       
+
+        $categoria->save();
 
         return redirect()
             ->route('categorias.index')
-            ->with('message', 'Registro actualizado exitosamente');
+            ->with('message', '¡ Registro actualizado exitosamente !');
     }
 
     /**

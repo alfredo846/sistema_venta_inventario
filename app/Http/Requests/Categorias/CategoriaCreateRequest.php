@@ -28,4 +28,15 @@ class CategoriaCreateRequest extends FormRequest
             'imagen'      => ['image', 'max:2048'],
         ];
     }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($validator->errors()->count()) {
+                if (!in_array($this->method(), ['PUT', 'PATCH'])) {
+                    $validator->errors()->add('post', true);
+                }
+            }
+        });
+    }
 }

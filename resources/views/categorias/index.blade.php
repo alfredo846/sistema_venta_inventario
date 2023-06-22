@@ -82,12 +82,15 @@
                                     </td>
                                     <td><span class='badge badge-mint'>Activo</span></td>
                                     <td>
-                                        <button class="btn btn-dark btn-icon add-tooltip" data-toggle="modal"
+                                        <button class="btn btn-dark btn-icon" data-toggle="modal"
                                             data-target="#showcategoria{{ $categoria->categoria_id }}"
                                             data-original-title=""><i class="ion-eye icon-lg"></i>
                                         </button>
-                                        <button class='btn btn-primary btn-icon' type='button' data-toggle='modal'
-                                            data-target='#actualizarmodal'><i class='demo-psi-pen-5 icon-md'></i></button>
+
+                                        <button type="button" class='btn btn-primary btn-icon' data-toggle='modal'
+                                            data-target='#editcategoria{{ $categoria->categoria_id }}'>
+                                            <i class='demo-psi-pen-5 icon-md'></i></button>
+
                                         <button class='btn btn-danger btn-icon'><i
                                                 class='demo-psi-recycling icon-md'></i></button>
                                     </td>
@@ -95,6 +98,7 @@
 
                                 @include('categorias.show')
 
+                                @include('categorias.edit')
                             @endforeach
                         </tbody>
                     </table>
@@ -103,7 +107,7 @@
             </div>
 
             <!--Start del modal Inserción Manual Categoria-->
-            <div class="modal fade" id="agregarcategoria" tabindex="-2" role="dialog" aria-labelledby="myModalLabel"
+            <div class="modal fade" id="agregarcategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                 style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
                     <div class="modal-content">
@@ -127,39 +131,11 @@
                 </div>
             </div>
 
-
-            <!--Start del modal actualizar Categoria-->
-            <div class="modal fade" id="actualizarmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Actualizar Categoría</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"><i class="fa fa-times fa-1x"></i></span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-
-                            <form action="{{ route('categorias.update', 1) }}" class="form" method="POST">
-                                @csrf
-                                @method('PUT')
-
-                                @include('categorias.edit')
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-
         </div>
 
     </div>
+
+   
 
 @endsection
 
@@ -195,6 +171,7 @@
         });
     </script>
 
+    {{-- --------------Borrar datos del formulario cada vez que se cierre un modal --------------- --}}
     <script>
         $('.modal').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
@@ -223,23 +200,23 @@
         });
     </script>
 
+    {{-- --------- Abrir modales de acuerdo a las validaciones ------- --}}
+    @if (!$errors->isEmpty())
+        @if ($errors->has('post'))
+            <script>
+                $(function() {
+                    $('#agregarcategoria').modal('show');
+                });
+            </script>
+        @else
+            <script>
+                $(function() {
+                    $('#editcategoria{{ $categoria->categoria_id }}').modal('show');
+                });
+            </script>
+        @endif
+    @endif
 
-    @if ($errors->first('nombre'))
-        <script>
-            $('#agregarcategoria').modal('show');
-        </script>
-    @endif
-    @if ($errors->first('imagen'))
-        <script>
-            $('#agregarcategoria').modal('show');
-        </script>
-    @endif
-
-    @if ($errors->first('name'))
-        <script>
-            $('#actualizarmodal').modal('show');
-        </script>
-    @endif
 
     {{-- --------- Personalización del tiempo en que se muestran las alertas ------- --}}
     <script type="text/javascript">
@@ -249,5 +226,14 @@
             }, 3000);
         });
     </script>
+
+    <script type="text/javascript">
+        function preview() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+
+
+
 
 @endsection
