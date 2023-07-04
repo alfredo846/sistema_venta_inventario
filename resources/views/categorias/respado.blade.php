@@ -19,6 +19,8 @@
 
 
 @section('content')
+    {{-- {{ dump(request()->routeIs('categoria')) }}  --}}
+
     <div id="content-container">
         <div id="page-head">
 
@@ -39,14 +41,14 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <div class="row text-right">
-                            <a href="{{ route('categorias.create') }}">
-                                <button class="btn btn-primary min-tablet">
-                                    <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
-                                </button>
-                            </a>
+                            <button class="btn btn-primary min-tablet" type="button" data-toggle="modal"
+                                data-target="#agregarcategoria">
+                                <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
+                            </button>
 
                             <button class="btn btn-success min-tablet">
-                                <i class="fa fa-file-excel-o"> </i> Inserción Excel</button>
+                                <i class="fa fa-file-excel-o"> </i> Inserción Excel Categoría</button>
+
                         </div>
                         <div class="row text-left">
                             <button class="btn btn-success btn-icon btn-circle add-tooltip" data-toggle="tooltip"
@@ -61,13 +63,12 @@
                 </div><br><br>
 
                 <div class="panel-body">
-                    <table id="categorias" class="table table-striped table-bordered display responsive no-wrap"
-                        cellspacing="0" width="100%">
+                    <table id="categoria" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Categoría</th>
                                 <th>Imagen</th>
-                                <th class="min-tablet">Estado</th>
+                                <th>Estado</th>
                                 <th class="min-tablet">Acciones</th>
                             </tr>
                         </thead>
@@ -93,12 +94,68 @@
                                 </tr>
 
                                 @include('categorias.show')
+
                             @endforeach
                         </tbody>
                     </table>
                 </div>
 
             </div>
+
+            <!--Start del modal Inserción Manual Categoria-->
+            <div class="modal fade" id="agregarcategoria" tabindex="-2" role="dialog" aria-labelledby="myModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-bold text-light text-center">Agregar Categoría</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times fa-1x text-bold text-light"></i></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form action="{{ route('categorias.store') }}" method="post" enctype="multipart/form-data"
+                                class="form-horizontal">
+                                @csrf
+                                @method('POST')
+                                @include('categorias.create')
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Start del modal actualizar Categoria-->
+            <div class="modal fade" id="actualizarmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Actualizar Categoría</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times fa-1x"></i></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <form action="{{ route('categorias.update', 1) }}" class="form" method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                @include('categorias.edit')
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 
@@ -127,7 +184,7 @@
     <!--Languaje [ DATATABLE ]-->
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#categorias').DataTable({
+            $('#categoria').DataTable({
                 "order": [
                     [2, "desc"]
                 ],
@@ -137,6 +194,52 @@
             });
         });
     </script>
+
+    <script>
+        $('.modal').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+            $("label.error").remove(); // para borrar la etiqueta de error del jquery validate
+            $('#img').removeAttr('src');
+            img.src = 'imagenes/categorias/shadow.jpg';
+        });
+    </script>
+
+    {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
+    <script type="text/javascript">
+        const defaultFile = 'imagenes/categorias/shadow.jpg';
+
+        const file = document.getElementById('imagen');
+        const img = document.getElementById('img');
+        file.addEventListener('change', e => {
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0])
+            } else {
+                img.src = defaultFile;
+            }
+        });
+    </script>
+
+
+    @if ($errors->first('nombre'))
+        <script>
+            $('#agregarcategoria').modal('show');
+        </script>
+    @endif
+    @if ($errors->first('imagen'))
+        <script>
+            $('#agregarcategoria').modal('show');
+        </script>
+    @endif
+
+    @if ($errors->first('name'))
+        <script>
+            $('#actualizarmodal').modal('show');
+        </script>
+    @endif
 
     {{-- --------- Personalización del tiempo en que se muestran las alertas ------- --}}
     <script type="text/javascript">

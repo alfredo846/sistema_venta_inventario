@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categorias\CategoriaCreateRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriaController extends Controller
 {
@@ -27,7 +28,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
     /**
@@ -36,8 +37,23 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoriaCreateRequest $request)
+    public function store(Request $request)
     {
+        $campos = [
+            'nombre' => 'required',
+        ];
+        $mensajes = [
+            'nombre.required' => 'El nombre es requerido',
+        ];
+        $validator = Validator::make($request->all(), $campos, $mensajes);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json([
+                'nombre' => $errors->get('nombre'),
+                'alerta' => 'danger',
+            ]);
+        }
+
         $imagen2 = 'shadow.jpg';
         $newCategoria = Categoria::create($request->all());
 
@@ -48,9 +64,15 @@ class CategoriaController extends Controller
         }
         $newCategoria->save();
 
-        return redirect()
-            ->route('categorias.index')
-            ->with('message', 'Registro creado exitosamente');
+
+        // return redirect()
+        // ->route('categorias.index')
+        // ->with('message', 'Registro creado exitosamente');
+
+        return response()->json([
+            'alerta'  => 'success',
+        ]);
+
     }
 
     /**
