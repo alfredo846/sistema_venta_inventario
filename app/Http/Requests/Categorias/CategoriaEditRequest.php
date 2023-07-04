@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Categorias;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoriaEditRequest extends FormRequest
@@ -13,7 +14,7 @@ class CategoriaEditRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class CategoriaEditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => ['required', 'max:30', 'regex:/^[a-z,\s,A-Z,á,Á,é,É,í,Í,ó,Ó,ü,ú,Ú,ñ,Ñ,]+$/', Rule::unique('categorias', 'nombre')->ignore($this->categoria)],
+            'imagen' => ['image', 'max:2048'],
         ];
     }
+
 }

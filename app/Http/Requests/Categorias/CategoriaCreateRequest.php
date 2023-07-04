@@ -28,4 +28,5 @@ class CategoriaCreateRequest extends FormRequest
             'imagen'      => ['image', 'max:2048'],
         ];
     }
+
 }

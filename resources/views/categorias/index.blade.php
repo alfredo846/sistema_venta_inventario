@@ -81,12 +81,15 @@
                                     </td>
                                     <td><span class='badge badge-mint'>Activo</span></td>
                                     <td>
-                                        <button class="btn btn-dark btn-icon add-tooltip" data-toggle="modal"
+                                        <button class="btn btn-dark btn-icon" data-toggle="modal"
                                             data-target="#showcategoria{{ $categoria->categoria_id }}"
                                             data-original-title=""><i class="ion-eye icon-lg"></i>
                                         </button>
-                                        <button class='btn btn-primary btn-icon' type='button' data-toggle='modal'
-                                            data-target='#actualizarmodal'><i class='demo-psi-pen-5 icon-md'></i></button>
+
+                                        <button type="button" class='btn btn-primary btn-icon' data-toggle='modal'
+                                            data-target='#editcategoria{{ $categoria->categoria_id }}'>
+                                            <i class='demo-psi-pen-5 icon-md'></i></button>
+
                                         <button class='btn btn-danger btn-icon'><i
                                                 class='demo-psi-recycling icon-md'></i></button>
                                     </td>
@@ -100,9 +103,36 @@
 
             </div>
 
+            <!--Start del modal Inserción Manual Categoria-->
+            <div class="modal fade" id="agregarcategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-bold text-light text-center">Agregar Categoría</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times fa-1x text-bold text-light"></i></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form action="{{ route('categorias.store') }}" method="post" enctype="multipart/form-data"
+                                class="form-horizontal">
+                                @csrf
+                                @method('POST')
+                                @include('categorias.create')
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
+
+   
 
 @endsection
 
@@ -138,6 +168,53 @@
         });
     </script>
 
+    {{-- --------------Borrar datos del formulario cada vez que se cierre un modal --------------- --}}
+    <script>
+        $('.modal').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+            $("label.error").remove(); // para borrar la etiqueta de error del jquery validate
+            $('#img').removeAttr('src');
+            img.src = 'imagenes/categorias/shadow.jpg';
+        });
+    </script>
+
+    {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
+    <script type="text/javascript">
+        const defaultFile = 'imagenes/categorias/shadow.jpg';
+
+        const file = document.getElementById('imagen');
+        const img = document.getElementById('img');
+        file.addEventListener('change', e => {
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0])
+            } else {
+                img.src = defaultFile;
+            }
+        });
+    </script>
+
+    {{-- --------- Abrir modales de acuerdo a las validaciones ------- --}}
+    @if (!$errors->isEmpty())
+        @if ($errors->has('post'))
+            <script>
+                $(function() {
+                    $('#agregarcategoria').modal('show');
+                });
+            </script>
+        @else
+            <script>
+                $(function() {
+                    $('#editcategoria{{ $categoria->categoria_id }}').modal('show');
+                });
+            </script>
+        @endif
+    @endif
+
+
     {{-- --------- Personalización del tiempo en que se muestran las alertas ------- --}}
     <script type="text/javascript">
         $(document).ready(function() {
@@ -146,5 +223,14 @@
             }, 3000);
         });
     </script>
+
+    <script type="text/javascript">
+        function preview() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+
+
+
 
 @endsection
