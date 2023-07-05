@@ -33,17 +33,18 @@
 
             <!-- Categorías -->
             <div class="panel">
-                <div class="content">
-                    @include('layouts.partials.alerts')
-                </div>
+                {{-- <div class="content"> --}}
+                {{-- @include('layouts.partials.alerts') --}}
+                {{-- </div> --}}
+                <div class="alert alert-mint text-bold" style="display: none;"></div>
+
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <div class="row text-right">
-                            <a href="{{ route('categorias.create') }}">
-                                <button class="btn btn-primary min-tablet">
-                                    <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
-                                </button>
-                            </a>
+                            <button class="btn btn-primary min-tablet" type="button" data-toggle="modal"
+                                data-target="#agregarcategoria">
+                                <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
+                            </button>
 
                             <button class="btn btn-success min-tablet">
                                 <i class="fa fa-file-excel-o"> </i> Inserción Excel</button>
@@ -94,13 +95,11 @@
                                                 class='demo-psi-recycling icon-md'></i></button>
                                     </td>
                                 </tr>
-
                                 @include('categorias.show')
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
             <!--Start del modal Inserción Manual Categoria-->
@@ -114,16 +113,12 @@
                                 <span aria-hidden="true"><i class="fa fa-times fa-1x text-bold text-light"></i></span>
                             </button>
                         </div>
-
                         <div class="modal-body">
-                            <form action="{{ route('categorias.store') }}" method="post" enctype="multipart/form-data"
-                                class="form-horizontal">
+                            <form class="form-horizontal" autocomplete="off" id="form">
                                 @csrf
-                                @method('POST')
                                 @include('categorias.create')
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -131,8 +126,6 @@
         </div>
 
     </div>
-
-   
 
 @endsection
 
@@ -154,6 +147,8 @@
     <!--Modals [ SAMPLE ]-->
     <script src="{{ asset('assets\js\demo\ui-modals.js') }}"></script>
 
+    <script src="{{ asset('assets\js\index.js') }}"></script>
+
     <!--Languaje [ DATATABLE ]-->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -165,16 +160,6 @@
                     url: "{{ asset('assets/js/spanish.json') }}"
                 }
             });
-        });
-    </script>
-
-    {{-- --------------Borrar datos del formulario cada vez que se cierre un modal --------------- --}}
-    <script>
-        $('.modal').on('hidden.bs.modal', function() {
-            $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
-            $("label.error").remove(); // para borrar la etiqueta de error del jquery validate
-            $('#img').removeAttr('src');
-            img.src = 'imagenes/categorias/shadow.jpg';
         });
     </script>
 
@@ -197,40 +182,33 @@
         });
     </script>
 
-    {{-- --------- Abrir modales de acuerdo a las validaciones ------- --}}
-    @if (!$errors->isEmpty())
-        @if ($errors->has('post'))
-            <script>
-                $(function() {
-                    $('#agregarcategoria').modal('show');
-                });
-            </script>
-        @else
-            <script>
-                $(function() {
-                    $('#editcategoria{{ $categoria->categoria_id }}').modal('show');
-                });
-            </script>
-        @endif
-    @endif
-
+    {{-- -------------Borrar datos del formulario cada vez que se cierre un modal -------- --}}
+    <script type="text/javascript">
+        $('.modal').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+            $("label.validacion").remove(); // para borrar la etiqueta de error del jquery validate
+            $('#img').removeAttr('src');
+            img.src = 'imagenes/categorias/add_image.jpg';
+        });
+    </script>
 
     {{-- --------- Personalización del tiempo en que se muestran las alertas ------- --}}
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             setTimeout(function() {
                 $(".content").fadeOut(1500);
             }, 3000);
         });
-    </script>
+    </script> --}}
 
+    {{-- Desactivar el boton despues de ser enviado --}}
     <script type="text/javascript">
-        function preview() {
-            frame.src = URL.createObjectURL(event.target.files[0]);
-        }
+        $('#btn-enviar').click(function(e) {
+            $('#btn-enviar').prop('disabled', true);
+            setTimeout(function() {
+                $('#btn-enviar').prop('disabled', false);
+            }, 3000);
+        });
     </script>
-
-
-
 
 @endsection

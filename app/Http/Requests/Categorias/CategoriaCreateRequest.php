@@ -24,9 +24,9 @@ class CategoriaCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'      => 'required|unique:categorias,nombre|max:30|regex:/^[a-z,\s,A-Z,á,Á,é,É,í,Í,ó,Ó,ü,ú,Ú,ñ,Ñ,]+$/',
-            'imagen'      => ['image', 'max:2048'],
+            'nombre' => 'required|unique:categorias,nombre|max:30|regex:/^[a-z,\s,A-Z,á,Á,é,É,í,Í,ó,Ó,ü,ú,Ú,ñ,Ñ,]+$/',
+            'imagen' => ['image', 'max:2048'],
         ];
     }
-
+ 
 }

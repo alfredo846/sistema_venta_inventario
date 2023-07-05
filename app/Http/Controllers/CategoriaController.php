@@ -46,7 +46,9 @@ class CategoriaController extends Controller
         $mensajes = [
             'nombre.required' => 'El nombre es requerido',
         ];
+        
         $validator = Validator::make($request->all(), $campos, $mensajes);
+
         if ($validator->fails()) {
             $errors = $validator->errors();
             return response()->json([
