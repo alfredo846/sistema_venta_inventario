@@ -184,7 +184,7 @@
 
     {{-- -------------Borrar datos del formulario cada vez que se cierre un modal -------- --}}
     <script type="text/javascript">
-        $('.modal').on('hidden.bs.modal', function() {
+        $('#agregarcategoria').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
             $("label.validacion").remove(); // para borrar la etiqueta de error del jquery validate
             $('#img').removeAttr('src');

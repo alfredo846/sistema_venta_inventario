@@ -15,6 +15,8 @@
 
     let nombre = document.querySelector(".errors-nombre");
     nombre.textContent = result.nombre[0];
+    let imagen = document.querySelector(".errors-imagen");
+    imagen.textContent = result.imagen[0];
 
     //--------------Detalle del alertas de validaciones en el formulario de crear--------
     let validacion = document.querySelectorAll(".validacion");
@@ -33,6 +35,10 @@
 
     //--------------Detalle del alerta de creacion de nuevo registro --------
     if (result.alerta == "success") {
+
+    //--------------Redirigir cada vez que se ingrese un nuevo registro --------
+    setTimeout("window.location = 'categorias'", 1000);
+
     const success = document.querySelector(".alert");
     success.textContent = "¡ Registro creado exitosamente !";
     success.style.display = "block";
@@ -46,7 +52,7 @@
     alert.forEach(div => {
     div.style.display = "none";
     });
-    }, 4000);
+    }, 2000);
 
     //--------------Cerrar el modal cada vez que se ingrese un nuevo registro --------
     $('#agregarcategoria').modal('hide')
