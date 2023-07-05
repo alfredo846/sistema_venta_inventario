@@ -88,7 +88,7 @@
                                         </button>
 
                                         <button type="button" class='btn btn-primary btn-icon' data-toggle='modal'
-                                            data-target='#editcategoria{{ $categoria->categoria_id }}'>
+                                            data-target='#actualizarcategoria{{ $categoria->categoria_id }}'>
                                             <i class='demo-psi-pen-5 icon-md'></i></button>
 
                                         <button class='btn btn-danger btn-icon'><i
@@ -96,6 +96,7 @@
                                     </td>
                                 </tr>
                                 @include('categorias.show')
+                                @include('categorias.edit')
                             @endforeach
                         </tbody>
                     </table>
@@ -123,6 +124,7 @@
                 </div>
             </div>
 
+
         </div>
 
     </div>
@@ -147,7 +149,9 @@
     <!--Modals [ SAMPLE ]-->
     <script src="{{ asset('assets\js\demo\ui-modals.js') }}"></script>
 
-    <script src="{{ asset('assets\js\index.js') }}"></script>
+    <script src="{{ asset('assets\js\categoria_create.js') }}"></script>
+    <script src="{{ asset('assets\js\categoria_update.js') }}"></script>
+
 
     <!--Languaje [ DATATABLE ]-->
     <script type="text/javascript">
@@ -162,6 +166,7 @@
             });
         });
     </script>
+
 
     {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
     <script type="text/javascript">
@@ -182,9 +187,10 @@
         });
     </script>
 
-    {{-- -------------Borrar datos del formulario cada vez que se cierre un modal -------- --}}
+
+    {{-- -------------Borrar datos del formulario cada vez que se cierre el modal de crear -------- --}}
     <script type="text/javascript">
-        $('#agregarcategoria').on('hidden.bs.modal', function() {
+        $('.modal').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
             $("label.validacion").remove(); // para borrar la etiqueta de error del jquery validate
             $('#img').removeAttr('src');
@@ -192,14 +198,6 @@
         });
     </script>
 
-    {{-- --------- Personalización del tiempo en que se muestran las alertas ------- --}}
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            setTimeout(function() {
-                $(".content").fadeOut(1500);
-            }, 3000);
-        });
-    </script> --}}
 
     {{-- Desactivar el boton despues de ser enviado --}}
     <script type="text/javascript">
@@ -210,5 +208,6 @@
             }, 3000);
         });
     </script>
+
 
 @endsection

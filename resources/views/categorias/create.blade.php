@@ -10,7 +10,7 @@
     <label class="col-md-3 form-control-label text-right is-required text-bold text-semibold">Categoría</label>
     <div class="col-md-7">
         <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de categoría"
-            autocomplete="off">
+            autocomplete="off" maxlength="30">
         <span class="validacion invalid-feedback errors-nombre"></span>
     </div>
 </div><br>
