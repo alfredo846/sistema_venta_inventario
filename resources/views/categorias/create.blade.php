@@ -75,14 +75,15 @@
                                     </div>
                                 </div><br>
 
-                                <label class="col-sm-1 control-label text-semibold">
-                                    <a href="{{ route('categorias.index') }}"
-                                        class="text-left fs-6 text-secundario add-tooltip" data-toggle="tooltip"
-                                        data-container="body" data-placement="top" data-original-title=""><img
-                                            src="{{ asset('assets/img/regresar.jpg') }}" width="34"
-                                            height="34"></a></label>
 
-                                <div class="modal-footer col-sm-11 text-right">
+
+                                <div class="modal-footer col-sm-12 text-right">
+                                    <label class="col-sm-1 control-label text-semibold">
+                                        <a href="{{ route('categorias.index') }}"
+                                            class="text-left fs-6 text-secundario add-tooltip" data-toggle="tooltip"
+                                            data-container="body" data-placement="top" data-original-title=""><img
+                                                src="{{ asset('assets/img/regresar.jpg') }}" width="34"
+                                                height="34"></a></label>
                                     <button type="submit" id="guardar" class="btn btn-mint text-center"
                                         onclick="this.disabled=true;this.value='Enviando.. .';this.form.submit();"><i
                                             class="fa fa-save fa-1x"></i>

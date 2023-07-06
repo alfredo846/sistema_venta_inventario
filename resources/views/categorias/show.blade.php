@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <div class="col-md-7"><br>
                         <img src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}"
-                        class="mg-lg mar-ver img-show" alt="Imagen de la categoría">
+                        class="mg-lg mar-ver img-show upload-box" alt="Imagen de la categoría">
                     </div>
                 </div>
                 
