@@ -38,8 +38,30 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoriaCreateRequest $request)
+    public function store(Request $request)
     {
+        $campos = [
+            'nombre' => 'required|unique:categorias,nombre|max:30|regex:/^[a-z,\s,A-Z,á,Á,é,É,í,Í,ó,Ó,ü,ú,Ú,ñ,Ñ,]+$/',
+            'imagen' => 'image|max:2048',
+        ];
+        $mensajes = [
+            'nombre.required' => 'El campo categoría es obligatorio',
+            'nombre.unique'   => 'El valor del campo categoría ya existe',
+            'nombre.max'      => 'El campo categoría no debe contener más de 30 caracteres',
+            'nombre.regex'    => 'El formato del campo categoría es inválido',
+            'imagen.image'    => 'El campo imagen debe ser una imagen',
+        ];
+        $validator = Validator::make($request->all(), $campos, $mensajes);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json([
+                'nombre' => $errors->get('nombre'),
+                'imagen' => $errors->get('imagen'),
+                'alerta' => 'danger',
+            ]);
+        }
+
         $imagen2 = 'shadow.jpg';
         $newCategoria = Categoria::create($request->all());
 
@@ -49,9 +71,11 @@ class CategoriaController extends Controller
             $newCategoria->imagen = $imagen2;
         }
         $newCategoria->save();
-        return redirect()
-            ->route('categorias.index')
-            ->with('message', '¡ Registro creado exitosamente !');
+
+        return response()->json([
+            'alerta'  => 'success',
+        ]);
+
     }
 
     /**
@@ -90,10 +114,10 @@ class CategoriaController extends Controller
         ];
         $mensajes = [
             'nombre.required' => 'El campo categoría es obligatorio',
-            'nombre.unique' => 'El valor del campo categoría ya existe',
-            'nombre.max' => 'El campo categoría no debe contener más de 30 caracteres',
-            'nombre.regex' => 'El formato del campo categoría es inválido',
-            'imagen.image' => 'El campo imagen debe ser una imagen',
+            'nombre.unique'   => 'El valor del campo categoría ya existe',
+            'nombre.max'      => 'El campo categoría no debe contener más de 30 caracteres',
+            'nombre.regex'    => 'El formato del campo categoría es inválido',
+            'imagen.image'    => 'El campo imagen debe ser una imagen',
         ];
         $validator = Validator::make($request->all(), $campos, $mensajes);
 
@@ -105,6 +129,7 @@ class CategoriaController extends Controller
                 'alerta' => 'danger',
             ]);
         }
+
 
         // $categoria->update($request->except('categoria_id', 'imagen'));
 
@@ -118,6 +143,8 @@ class CategoriaController extends Controller
         //     }
         //     $categoria->imagen = Storage::disk('categoria-imagenes')->put('', $request->file('imagen'));
         // }
+
+       
 
         // $categoria->save();
 

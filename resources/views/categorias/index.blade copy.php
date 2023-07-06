@@ -33,17 +33,18 @@
 
             <!-- Categorías -->
             <div class="panel">
-                <div class="content">
-                    @include('layouts.partials.alerts')
-                </div>
+                {{-- <div class="content"> --}}
+                {{-- @include('layouts.partials.alerts') --}}
+                {{-- </div> --}}
+                <div class="alert alert-mint text-bold" style="display: none;"></div>
 
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <div class="row text-right">
-                            <a href="{{ route('categorias.create') }}">
-                                <button class="btn btn-primary min-tablet" type="button">
-                                    <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
-                                </button></a>
+                            <button class="btn btn-primary min-tablet" type="button" data-toggle="modal"
+                                data-target="#agregarcategoria">
+                                <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
+                            </button>
 
                             <button class="btn btn-success min-tablet">
                                 <i class="fa fa-file-excel-o"> </i> Inserción Excel</button>
@@ -95,11 +96,34 @@
                                     </td>
                                 </tr>
                                 @include('categorias.show')
+                                @include('categorias.edit')
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <!--Start del modal Inserción Manual Categoria-->
+            <div class="modal fade" id="agregarcategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-bold text-light text-center">Agregar Categoría</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times fa-1x text-bold text-light"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" autocomplete="off" id="form">
+                                @csrf
+                                @include('categorias.create')
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -125,6 +149,9 @@
     <!--Modals [ SAMPLE ]-->
     <script src="{{ asset('assets\js\demo\ui-modals.js') }}"></script>
 
+    <script src="{{ asset('assets\js\categoria_create.js') }}"></script>
+    <script src="{{ asset('assets\js\categoria_update.js') }}"></script>
+
 
     <!--Languaje [ DATATABLE ]-->
     <script type="text/javascript">
@@ -141,16 +168,46 @@
     </script>
 
 
-    {{-- configuración del tiempo  en que aparece la alerta --}}
+    {{-- --------------Previsualizar imagen en el formulario de create --------------- --}}
     <script type="text/javascript">
-        $(document).ready(function() {
-            setTimeout(function() {
-                $(".content").fadeOut(1500);
-            }, 3000);
+        const defaultFile = 'imagenes/categorias/shadow.jpg';
+
+        const file = document.getElementById('imagen');
+        const img = document.getElementById('img');
+        file.addEventListener('change', e => {
+            if (e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0])
+            } else {
+                img.src = defaultFile;
+            }
         });
     </script>
 
 
+    {{-- -------------Borrar datos del formulario cada vez que se cierre el modal de crear -------- --}}
+    <script type="text/javascript">
+        $('.modal').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+            $("label.validacion").remove(); // para borrar la etiqueta de error del jquery validate
+            $('#img').removeAttr('src');
+            img.src = 'imagenes/categorias/add_image.jpg';
+        });
+    </script>
+
+
+    {{-- Desactivar el boton despues de ser enviado --}}
+    <script type="text/javascript">
+        $('#btn-enviar').click(function(e) {
+            $('#btn-enviar').prop('disabled', true);
+            setTimeout(function() {
+                $('#btn-enviar').prop('disabled', false);
+            }, 3000);
+        });
+    </script>
 
 
 @endsection
