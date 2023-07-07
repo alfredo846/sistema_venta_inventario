@@ -77,7 +77,7 @@
                                     <td>{{ $categoria->nombre }}</td>
                                     <td>
                                         <img src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}"
-                                            class="profile-image" alt="Imagen categoría">
+                                            class="profile-image upload-box" alt="Imagen categoría">
                                     </td>
                                     <td><span class='badge badge-mint'>Activo</span></td>
                                     <td>
@@ -149,8 +149,6 @@
             }, 3000);
         });
     </script>
-
-
 
 
 @endsection

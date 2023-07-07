@@ -122,10 +122,15 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     img.src = e.target.result;
+                    document.getElementById("img").removeAttribute("class");
+                    img.setAttribute("class", "mg-lg mar-ver img-preview");
+
                 }
                 reader.readAsDataURL(e.target.files[0])
             } else {
                 img.src = defaultFile;
+                document.getElementById("img").removeAttribute("class");
+                img.setAttribute("class", "mg-lg mar-ver img-cent upload-box");
             }
         });
     </script>
