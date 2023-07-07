@@ -67,7 +67,7 @@ cursor: pointer;
 }
 
 .img-preview:hover{
-    filter: saturate(120%);
+filter: saturate(120%);
 
 }
 
@@ -125,5 +125,19 @@ cursor: pointer;
 .invalid {
 border: solid 1px red;
 box-shadow: 0 0 5px red;
-
 }
+
+/* Acciones en escritorio y mobil */
+@media screen and (max-width: 600px) {
+.ocultar-div{
+display:none;
+}
+}
+
+@media screen and (min-width: 601px) {
+.mostrar-div{
+display:none;
+}
+}
+
+

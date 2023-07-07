@@ -15,6 +15,9 @@
     <!--Themify Icons [ OPTIONAL ]-->
     <link href="{{ asset('assets\plugins\themify-icons\themify-icons.min.css') }}" rel="stylesheet">
 
+    {{-- script swetalert --}}
+    <script src="{{ asset('assets\js\sweetalert2@11.js') }}"></script>
+
 @endsection
 
 
@@ -81,18 +84,52 @@
                                     </td>
                                     <td><span class='badge badge-mint'>Activo</span></td>
                                     <td>
-                                        <button class="btn btn-dark btn-icon" data-toggle="modal"
-                                            data-target="#showcategoria{{ $categoria->categoria_id }}"
-                                            data-original-title=""><i class="ion-eye icon-lg"></i>
-                                        </button>
+                                        <div class="ocultar-div">
+                                            <button class="btn btn-dark btn-icon" data-toggle="modal"
+                                                data-target="#showcategoria{{ $categoria->categoria_id }}"
+                                                data-original-title=""><i class="ion-eye icon-lg"></i>
+                                            </button>
 
-                                        <a href="{{ route('categorias.edit', $categoria) }}">
-                                        <button type="button" class='btn btn-primary btn-icon'>
-                                            <i class='demo-psi-pen-5 icon-md'></i></button>
-                                        </a>
+                                            <a href="{{ route('categorias.edit', $categoria) }}">
+                                                <button type="button" class='btn btn-primary btn-icon'>
+                                                    <i class='demo-psi-pen-5 icon-md '></i></button>
+                                            </a>
 
-                                        <button class='btn btn-danger btn-icon'><i
-                                                class='demo-psi-recycling icon-md'></i></button>
+
+                                            <form action="{{ route('categorias.destroy', $categoria) }}" method="post"
+                                                style="display: inline-block" class="deletecategoria" name="escritorio">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class='btn btn-danger btn-icon'>
+                                                    <i class='demo-psi-recycling icon-md'></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        {{------------------- Modo responsive ------------------------------}}
+                                        <div class="mostrar-div">
+                                            <button class="btn btn-dark btn-icon" data-toggle="modal"
+                                                data-target="#showcategoria{{ $categoria->categoria_id }}"
+                                                data-original-title=""><i class="ion-eye icon-lg"></i>
+                                            </button>
+
+                                            <a href="{{ route('categorias.edit', $categoria) }}">
+                                                <button type="button" class='btn btn-primary btn-icon'>
+                                                    <i class='demo-psi-pen-5 icon-md '></i></button>
+                                            </a>
+
+                                            <form action="{{ route('categorias.destroy', $categoria) }}" method="post"
+                                                style="display: inline-block" name="mobil">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class='btn btn-danger btn-icon'
+                                                    onclick="return confirm('¿Está seguro de que desea eliminar el registro?')">
+                                                    <i class='demo-psi-recycling icon-md'></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+
                                     </td>
                                 </tr>
                                 @include('categorias.show')
@@ -127,6 +164,8 @@
     <script src="{{ asset('assets\js\demo\ui-modals.js') }}"></script>
 
 
+
+
     <!--Languaje [ DATATABLE ]-->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -150,6 +189,39 @@
             }, 3000);
         });
     </script>
+
+    {{-- Alerta del formulario eliminar --}}
+    <script>
+        $('.deletecategoria').submit(function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Este registro se eliminará!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#26a69a',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    </script>
+
+    {{-- Alerta de que el registro se elimino exitosamente --}}
+    @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'El registro ha sido eliminado exitosamente.',
+                'success',
+            )
+        </script>
+    @endif
 
 
 @endsection
