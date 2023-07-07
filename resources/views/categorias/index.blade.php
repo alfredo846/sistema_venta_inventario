@@ -86,9 +86,10 @@
                                             data-original-title=""><i class="ion-eye icon-lg"></i>
                                         </button>
 
-                                        <button type="button" class='btn btn-primary btn-icon' data-toggle='modal'
-                                            data-target='#actualizarcategoria{{ $categoria->categoria_id }}'>
+                                        <a href="{{ route('categorias.edit', $categoria) }}">
+                                        <button type="button" class='btn btn-primary btn-icon'>
                                             <i class='demo-psi-pen-5 icon-md'></i></button>
+                                        </a>
 
                                         <button class='btn btn-danger btn-icon'><i
                                                 class='demo-psi-recycling icon-md'></i></button>

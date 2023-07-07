@@ -73,6 +73,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
+        return view('categorias.edit', compact('categoria'));
     }
 
     /**
@@ -82,48 +83,26 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(CategoriaEditRequest $request, Categoria $categoria)
     {
-        $campos = [
-            'nombre' => 'required|unique:categorias,nombre|max:30|regex:/^[a-z,\s,A-Z,á,Á,é,É,í,Í,ó,Ó,ü,ú,Ú,ñ,Ñ,]+$/',
-            'imagen' => 'image|max:2048',
-        ];
-        $mensajes = [
-            'nombre.required' => 'El campo categoría es obligatorio',
-            'nombre.unique' => 'El valor del campo categoría ya existe',
-            'nombre.max' => 'El campo categoría no debe contener más de 30 caracteres',
-            'nombre.regex' => 'El formato del campo categoría es inválido',
-            'imagen.image' => 'El campo imagen debe ser una imagen',
-        ];
-        $validator = Validator::make($request->all(), $campos, $mensajes);
+        $categoria->update($request->except('categoria_id', 'imagen'));
 
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return response()->json([
-                'nombre' => $errors->get('name'),
-                'imagen' => $errors->get('foto'),
-                'alerta' => 'danger',
-            ]);
+        if ($request->hasFile('imagen')) {
+            if (Storage::disk('categoria-imagenes')->exists("$categoria->imagen")) {
+                if ($categoria->imagen == 'shadow.jpg') {
+                    $categoria->imagen = 'shadow.jpg';
+                } else {
+                    Storage::disk('categoria-imagenes')->delete("$categoria->imagen");
+                }
+            }
+            $categoria->imagen = Storage::disk('categoria-imagenes')->put('', $request->file('imagen'));
         }
 
-        // $categoria->update($request->except('categoria_id', 'imagen'));
+        $categoria->save();
 
-        // if ($request->hasFile('imagen')) {
-        //     if (Storage::disk('categoria-imagenes')->exists("$categoria->imagen")) {
-        //         if ($categoria->imagen == 'shadow.jpg') {
-        //             $categoria->imagen = 'shadow.jpg';
-        //         } else {
-        //             Storage::disk('categoria-imagenes')->delete("$categoria->imagen");
-        //         }
-        //     }
-        //     $categoria->imagen = Storage::disk('categoria-imagenes')->put('', $request->file('imagen'));
-        // }
-
-        // $categoria->save();
-
-        // return redirect()
-        //     ->route('categorias.index')
-        //     ->with('message', '¡ Registro actualizado exitosamente !');
+        return redirect()
+            ->route('categorias.index')
+            ->with('message', '¡ Registro actualizado exitosamente !');
     }
 
     /**

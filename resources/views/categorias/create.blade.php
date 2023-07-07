@@ -30,6 +30,7 @@
                         <form action="{{ route('categorias.store') }}" method="post" enctype="multipart/form-data"
                             class="form-horizontal">
                             @csrf
+                            @method('POST')
                             <div class="panel-body create">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">AGREGAR CATEGORÍA</h3>

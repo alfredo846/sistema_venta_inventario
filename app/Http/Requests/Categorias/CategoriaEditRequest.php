@@ -30,4 +30,16 @@ class CategoriaEditRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El campo :attribute  categoría es obligatorio.',
+            'nombre.unique'   => 'El valor del campo :attribute categoría ya existe',
+            'nombre.max'      => 'El campo :attribute categoría debe contener máximo 30 carcteres',
+            'nombre.regex'    => 'El formato del campo :attribute categoría no es valido, solo se permiten letras y espacios',
+            'imagen.image'    => 'El campo :attribute debe ser una imagen jpg, jpeg, png, gif',
+            'imagen.max'      => 'La :attribute debe pesar máximo 2048 MB',
+        ];
+    }
+
 }

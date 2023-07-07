@@ -19,7 +19,7 @@
 
 						
 						            <!--Menu list item catálogos-->
-						            <li class="{{ request()->routeIs('categorias.index', 'categorias.create', 'marca', 'empaque', 'unidad_medida') ? 'active-sub' : ''}}">
+						            <li class="{{ request()->routeIs('categorias.index', 'categorias.create', 'categorias.edit', 'marca', 'empaque', 'unidad_medida') ? 'active-sub' : ''}}">
 						                <a href="#">
 						                    <i class="fa fa-list-alt"></i>
 						                    <span class="menu-title">Catálogos</span>
@@ -27,8 +27,8 @@
 						                </a>
 						
 						                <!--Submenu-->
-						                <ul class="{{ request()->routeIs('categorias.index', 'categorias.create', 'marca', 'empaque', 'unidad_medida') ? 'collapse in' : ''}}">
-						                    <li class="{{ request()->routeIs('categorias.index', 'categorias.create') ? 'active-link' : ''}}"><a href="{{ route('categorias.index') }}">Categorías</a></li>
+						                <ul class="{{ request()->routeIs('categorias.index', 'categorias.create', 'categorias.edit', 'marca', 'empaque', 'unidad_medida') ? 'collapse in' : ''}}">
+						                    <li class="{{ request()->routeIs('categorias.index', 'categorias.create', 'categorias.edit') ? 'active-link' : ''}}"><a href="{{ route('categorias.index') }}">Categorías</a></li>
 											<li class="{{ request()->routeIs('marca') ? 'active-link' : ''}}"><a href="marca">Marcas</a></li>
 											<li class="{{ request()->routeIs('empaque') ? 'active-link' : ''}}"><a href="empaque">Empaques</a></li>
 											<li class="{{ request()->routeIs('unidad_medida') ? 'active-link' : ''}}"><a href="unidad_medida">Unidades de medida</a></li>
