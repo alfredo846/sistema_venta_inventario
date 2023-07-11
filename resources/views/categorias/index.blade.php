@@ -47,18 +47,20 @@
                                 <button class="btn btn-primary min-tablet" type="button">
                                     <i class="fa fa-plus-square"> </i> Agregar Categoría</button>
                                 </button></a>
-
-                            <button class="btn btn-success min-tablet">
-                                <i class="fa fa-file-excel-o"> </i> Inserción Excel</button>
+                            {{-- <button class="btn btn-success min-tablet">
+                                <i class="fa fa-file-excel-o"> </i> Inserción Excel</button> --}}
                         </div>
                         <div class="row text-left">
                             <button class="btn btn-success btn-icon btn-circle add-tooltip" data-toggle="tooltip"
                                 data-container="body" data-placement="top" data-original-title="Exportar Excel"><i
                                     class="fa fa-file-excel-o fa-md"></i></button>
 
-                            <button class="btn btn-danger btn-icon btn-circle add-tooltip" data-toggle="tooltip"
-                                data-container="body" data-placement="top" data-original-title="Exportar PDF"><i
-                                    class="fa fa-file-pdf-o fa-md"></i></button>
+                            <a href="{{ route('categorias.pdf') }}">
+                                <button class="btn btn-danger btn-icon btn-circle add-tooltip" data-toggle="tooltip"
+                                    data-container="body" data-placement="top" data-original-title="Exportar PDF"><i
+                                        class="fa fa-file-pdf-o fa-md"></i>
+                                </button>
+                            </a>
                         </div>
                     </h3>
                 </div><br><br>
@@ -106,7 +108,7 @@
                                             </form>
                                         </div>
 
-                                        {{------------------- Modo responsive ------------------------------}}
+                                        {{-- ----------------- Modo responsive ---------------------------- --}}
                                         <div class="mostrar-div">
                                             <button class="btn btn-dark btn-icon" data-toggle="modal"
                                                 data-target="#showcategoria{{ $categoria->categoria_id }}"

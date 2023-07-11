@@ -1,5 +1,5 @@
 .invalid-feedback{
-color: rgb(255, 0, 0);
+color: #F91243;
 }
 
 .is-required:before {
@@ -123,9 +123,13 @@ cursor: pointer;
 }
 
 .invalid {
-border: solid 1px red;
-box-shadow: 0 0 5px red;
+    /* box-shadow: 0 0 5px #F91243; */
+border: solid 1px #F91243;
+outline: 0;
+border-width: 0 0 2px;
+border-color: #F91243;
 }
+
 
 /* Acciones en escritorio y mobil */
 @media screen and (max-width: 600px) {
