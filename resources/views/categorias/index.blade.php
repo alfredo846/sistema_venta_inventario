@@ -55,7 +55,7 @@
                                 data-container="body" data-placement="top" data-original-title="Exportar Excel"><i
                                     class="fa fa-file-excel-o fa-md"></i></button>
 
-                            <a href="{{ route('categorias.pdf') }}">
+                            <a href="{{ route('categorias.pdf') }}" target="_blank">
                                 <button class="btn btn-danger btn-icon btn-circle add-tooltip" data-toggle="tooltip"
                                     data-container="body" data-placement="top" data-original-title="Exportar PDF"><i
                                         class="fa fa-file-pdf-o fa-md"></i>
