@@ -41,7 +41,7 @@
                                     <div class="col-sm-8">
                                         <input type="text" name="nombre" id="nombre" class="nombre form-control"
                                             placeholder="Nombre de categoría" autocomplete="off" maxlength="30"
-                                            value={{ old('nombre') }}>
+                                            value="{{ old('nombre') }}">
                                         <span></span>
                                         <div class="alertarequest">
                                             @if ($errors->first('nombre'))

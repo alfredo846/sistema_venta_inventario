@@ -41,7 +41,7 @@
                                     <div class="col-sm-8">
                                         <input type="text" name="nombre" id="nombre" class="nombre form-control"
                                             placeholder="Nombre de categoría" autocomplete="off" maxlength="30"
-                                            value={{ $categoria->nombre }}>
+                                            value="{{ $categoria->nombre }}">
                                         <span></span>
                                         <div class="alertarequest">
                                             @if ($errors->first('nombre'))
@@ -58,9 +58,9 @@
                                         class="col-sm-3 control-label text-semibold"><em>Imagen</em></label>
                                     <div class="col-sm-8" for="imagen">
                                         <label for="imagen">
-                                                <img class='mg-lg mar-ver img-preview' id="img"
-                                                    src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}"
-                                                    alt="Seleccione una imagen para está categoría.">
+                                            <img class='mg-lg mar-ver img-preview' id="img"
+                                                src="{{ asset('imagenes/categorias/' . $categoria->imagen) }}"
+                                                alt="Seleccione una imagen para está categoría.">
                                         </label>
 
                                         <div class="alertarequest">
