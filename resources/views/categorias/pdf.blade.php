@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{{ public_path('assets/css/estilospdf.css') }}">
-    <title>Categorias PDF</title>
+    <title>Your Company | Categorias PDF</title>
 </head>
 
 <body>
@@ -22,6 +22,9 @@
 
     <footer>
         <img src="{{ public_path('img/logo.png') }}" id="logo-companyfooter" alt="imagotipo-company">
+        <div class="time">
+            <h5> Company@2023</h5>
+        </div>
     </footer>
 
     <main>

@@ -24,7 +24,8 @@ Route::view('/', 'inicio')->name('inicio');
 
 //--------------------------Catálogos--------------------------------------
 Route::resource('categorias', CategoriaController::class);
-Route::get('/categoriaspdf', [CategoriapdfController::class, 'pdf'])->name('categorias.pdf');
+Route::get('/categoriaspdf', [CategoriapdfController::class, 'pdf'])->name('categorias.exportpdf');
+Route::get('/categoriasexcel', [CategoriapdfController::class, 'exportAllCategorias'])->name('categorias.exportexcel');
 
 Route::view('marca' , 'marca')->name('marca');
 Route::view('empaque', 'empaque')->name('empaque');

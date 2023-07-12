@@ -51,11 +51,14 @@
                                 <i class="fa fa-file-excel-o"> </i> Inserción Excel</button> --}}
                         </div>
                         <div class="row text-left">
-                            <button class="btn btn-success btn-icon btn-circle add-tooltip" data-toggle="tooltip"
-                                data-container="body" data-placement="top" data-original-title="Exportar Excel"><i
-                                    class="fa fa-file-excel-o fa-md"></i></button>
+                            <a href="{{ route('categorias.exportexcel') }}">
+                                <button class="btn btn-success btn-icon btn-circle add-tooltip" data-toggle="tooltip"
+                                    data-container="body" data-placement="top" data-original-title="Exportar Excel"><i
+                                        class="fa fa-file-excel-o fa-md"></i>
+                                </button>
+                            </a>
 
-                            <a href="{{ route('categorias.pdf') }}" target="_blank">
+                            <a href="{{ route('categorias.exportpdf') }}" target="_blank">
                                 <button class="btn btn-danger btn-icon btn-circle add-tooltip" data-toggle="tooltip"
                                     data-container="body" data-placement="top" data-original-title="Exportar PDF"><i
                                         class="fa fa-file-pdf-o fa-md"></i>
