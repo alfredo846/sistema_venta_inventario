@@ -15,7 +15,7 @@ class CategoriasTableSeeder extends Seeder
      */
     public function run()
     {
-        Categoria::factory()->count(125)->create();
+        Categoria::factory()->count(1000)->create();
         // $data = [
         //     [
         //         'nombre'     => 'Botanas',
@@ -110,7 +110,7 @@ class CategoriasTableSeeder extends Seeder
         //     ],
             
         //     ];
-        //     DB::table('categorias')->insert($data);
+            // DB::table('categorias')->insert($data);
 
 
         }

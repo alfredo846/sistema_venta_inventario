@@ -24,6 +24,7 @@ class CategoriaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->unique()->name,
+            'imagen' => "shadow.jpg",
         ];
     }
 }

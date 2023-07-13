@@ -23,11 +23,13 @@ use App\Http\Controllers\CategoriapdfController;
 Route::view('/', 'inicio')->name('inicio');
 
 //--------------------------Catálogos--------------------------------------
+//--------------------------Categorias-------------------
 Route::resource('categorias', CategoriaController::class);
 Route::get('/categoriaspdf', [CategoriapdfController::class, 'pdf'])->name('categorias.exportpdf');
 Route::get('/categoriasexcel', [CategoriapdfController::class, 'exportAllCategorias'])->name('categorias.exportexcel');
 
-Route::view('marca' , 'marca')->name('marca');
+
+Route::view('marca', 'marca')->name('marca');
 Route::view('empaque', 'empaque')->name('empaque');
 Route::view('unidad_medida', 'unidad_medida')->name('unidad_medida');
 
@@ -61,10 +63,4 @@ Route::view('rol', 'rol')->name('rol');
 // --------------------------Backup------------------------------------------
 Route::view('backup', 'backup')->name('backup');
 
-
 Route::view('forms', 'forms')->name('forms');
-
-
-
-
-

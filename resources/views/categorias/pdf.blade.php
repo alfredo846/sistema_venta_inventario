@@ -12,24 +12,32 @@
 <body>
     <header>
         <img src="{{ public_path('img/logo.png') }}" alt="logo-company" id="logo-companya">
-        <h1>Categorias de los productos</h1>
+        <h1>Your Company Your Comany</h1>
         <img src="{{ public_path('img/logo.png') }}" alt="logo-compania" id="logo-companyb">
+       
         <div class="time">
+            <h5>Fecha de impresión&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
             <h5> {{ $date }}
                 {{ $hora }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
         </div>
-    </header>
+        <br>
+        <div class="time2">
+            <br>&nbsp; <h2>Listado de categorias</h2>  
+        </div>
+    </header> 
 
     <footer>
         <img src="{{ public_path('img/logo.png') }}" id="logo-companyfooter" alt="imagotipo-company">
         <div class="time">
-            <h5> Company@2023</h5>
+            <h5> correo @gmail.com</h5>
         </div>
     </footer>
-
     <main>
         <div class="container">
             <table class="table table-striped">
+                <div class="time">
+                    <h5> Company@2023</h5>
+                </div>
                 <thead>
                     <th>Categoría</th>
                     <th>Estado</th>
@@ -40,7 +48,7 @@
                             <td>
                                 {{ $categoria->nombre }}
                             </td>
-                            <td>
+                            <td class="activo">
                                 Activo
                             </td>
                         </tr>
